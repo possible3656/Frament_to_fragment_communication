@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.location.OnNmeaMessageListener;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity implements fragmentOne.onMessageSendListner {
@@ -35,18 +37,20 @@ public class MainActivity extends AppCompatActivity implements fragmentOne.onMes
 
     }
 
+
     @Override
-    public void onMessageSend(String message) {
+    public void onMessageSend(model model) {
+        display_fragment display_fragment=  new display_fragment();
+        display_fragment.display(model);
 
-        display_fragment display_fragment= new display_fragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("message",message);
-        display_fragment.setArguments(bundle);
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction()
+      //  Log.d("TAG", "onMessageSend: "+model.toString());
+
+
+        FragmentTransaction fragmentTransaction =  getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_container,display_fragment,null);
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+
 
 
     }

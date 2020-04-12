@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +17,14 @@ import android.widget.TextView;
  */
 public class display_fragment extends Fragment {
     TextView textView;
+String start;
 
 
     public display_fragment() {
         // Required empty public constructor
     }
+
+
 
 
     @Override
@@ -30,17 +34,14 @@ public class display_fragment extends Fragment {
       View view =  inflater.inflate(R.layout.fragment_display_fragment, container, false);
 
       textView=view.findViewById(R.id.display_text);
-
-      Bundle bundle= getArguments();
-      String string = bundle.getString("message");
-
-
-     textView.setText(string);
-
+      textView.setText(start);
 
       return  view;
-
-
     }
+    public void display(model model){
+        start=model.getName();
+        //Log.d("TAG1", "display: "+start);
+    }
+
 
 }

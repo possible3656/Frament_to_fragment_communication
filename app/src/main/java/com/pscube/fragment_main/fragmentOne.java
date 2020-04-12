@@ -25,7 +25,7 @@ public class fragmentOne extends Fragment {
 
     public interface onMessageSendListner{
 
-        public void onMessageSend(String message);
+        public void onMessageSend(model model);
 
 
     }
@@ -48,8 +48,9 @@ public class fragmentOne extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message= editText.getText().toString();
-                messageSendListner.onMessageSend(message);
+              model model = new model();
+              model.setName(editText.getText().toString());
+                messageSendListner.onMessageSend(model);
             }
         });
 
@@ -62,15 +63,9 @@ public class fragmentOne extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Activity activity= (Activity) context;
-            try {
-                messageSendListner = (onMessageSendListner) activity;
-            }
-            catch (ClassCastException e){
-
-                throw new ClassCastException(activity.toString());
-
-            }
+       if (context instanceof onMessageSendListner) {
+           messageSendListner = (onMessageSendListner) context;
+       }
 
 
 
